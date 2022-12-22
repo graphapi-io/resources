@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "strictPropertyInitialization": false,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["webpack-env", "jest"],
+    "lib": ["esnext", "ES2020"]
+  },
+  "include": ["/**/*.ts"],
+  "exclude": ["node_modules"]
+}

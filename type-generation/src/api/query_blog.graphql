@@ -1,0 +1,6 @@
+query QUERY_BLOG($id: ID!) {
+  blog(id: $id) {
+    id
+    name
+  }
+}
