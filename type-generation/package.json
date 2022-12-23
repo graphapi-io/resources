@@ -1,0 +1,23 @@
+{
+  "name": "type-generation",
+  "version": "0.1.0",
+  "description": "Graphapi type generation",
+  "author": {
+    "name": "GraphApi.io GmbH",
+    "url": "https://graphapi.io"
+  },
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.13.12",
+    "@graphql-codegen/typescript": "^2.8.5",
+    "@graphql-codegen/typescript-operations": "^2.5.10",
+    "dotenv": "^16.0.3",
+    "graphql": "^15.0.0",
+    "typescript": "^3.9.10"
+  }
+}
