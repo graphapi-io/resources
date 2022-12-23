@@ -20,7 +20,7 @@ cd resources
 ### Get your api key
 
 1.  Go into your API Settings on https://my.graphapi.io
-1.  You may be asked to log in to your API. If you haven't done it yet, sign up using the same email that you use for signing into the my.graphapi.io
+1.  You may be asked to log in to your API. If you haven't done it yet, sign up using the same email address you're signed in with on my.graphapi.io
 1.  Find "Authorization Settings"
 1.  Under "BASIC AUTHORIZATION" you should see "DEFAULT KEY". Technically you could use it, but it's a best practice to generate a separate key for each application/use case.
 1.  Click "Add Api Key" button in the section below
@@ -29,7 +29,7 @@ cd resources
     ![Api Keys Section](./docs/img/add-api-key-2.png?raw=true)
 1.  Copy the key
     ![Api Keys Section](./docs/img/add-api-key-3.png?raw=true)
-1.  In the repository copy the .env.example file into .env file
+1.  In the repository copy the .env.example file to .env file (or simply run `cp .env.example .env`)
 1.  Replace the `API_KEY=<PROVIDE_YOUR_KEY_HERE>` with actual key. For example `API_KEY=yoursecretapikey`
 
 ### Get your api url
@@ -63,4 +63,4 @@ The types based on the schema are always generated, and they consist of all of t
 
 As the only query we have is `blog`, the only query response in `src/generated/types.ts` is `IQueryBlogQuery`.
 
-It makes sense as the power of graphql is that you can use the same api in different applications, and each of them can query different pieces of data. With this appraoch each application can get its own types as well.
+It makes sense as the power of graphql is that you can use the same api in different applications, and each of them can query different pieces of data. With this approach each application can get its own types as well.
