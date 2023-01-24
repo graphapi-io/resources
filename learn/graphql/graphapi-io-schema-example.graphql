@@ -30,9 +30,9 @@ type Mutation {
 }
 
 type Subscription {
-  onCreateOrg: Org
-  onUpdateOrg(id: ID): Org
-  onDeleteOrg(id: ID): Org
+  onCreateOrder: Order
+  onUpdateOrder(id: ID): Order
+  onDeleteOrder(id: ID): Order
 }
 
 schema {
