@@ -1,0 +1,42 @@
+enum OrderStatusEnum {
+  CANCELLED
+  COMPLETED
+  PROCESSING
+}
+
+interface Node {
+  id: ID!
+}
+
+type Order implements Node {
+  id: ID!
+  status: OrderStatusEnum
+}
+
+input OrderInput {
+  id: ID
+  status: OrderStatusEnum!
+}
+
+type Query {
+  order(id: ID!): Order
+  listOrders(limit: Int): [Order]
+}
+
+type Mutation {
+  createOrder(input: OrderInput!): Order
+  updateOrder(input: OrderInput!): Order
+  deleteOrder(input: OrderInput!): Order
+}
+
+type Subscription {
+  onCreateOrder: Order
+  onUpdateOrder(id: ID): Order
+  onDeleteOrder(id: ID): Order
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
