@@ -1,6 +1,6 @@
 # GraphAPI Type Generation
 
-This example describes how to generate typescript definitions for your GraphQL-based GraphAPI.
+This README describes how to generate typescript definitions for your GraphQL-based GraphAPI.
 
 ## Steps
 
