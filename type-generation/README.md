@@ -1,6 +1,6 @@
-# GraphApi.io Type generation
+# GraphAPI Type Generation
 
-In this simple example we will show how to quickly generate typescript definitions for you Graph Api.
+This example describes how to generate typescript definitions for your GraphQL-based GraphAPI.
 
 ## Steps
 
@@ -17,9 +17,9 @@ cd resources
  npm i
 ```
 
-### Get your api key
+### Create API key
 
-1.  Go into your API Settings on https://my.graphapi.com
+1.  Open your GraphAPI Settings on https://my.graphapi.io
 1.  You may be asked to log in to your API. If you haven't done it yet, sign up using the same email address you're signed in with on my.graphapi.io
 1.  Find "Authorization Settings"
 1.  Under "BASIC AUTHORIZATION" you should see "DEFAULT KEY". Technically you could use it, but it's a best practice to generate a separate key for each application/use case.
@@ -32,12 +32,12 @@ cd resources
 1.  In the repository copy the .env.example file to .env file (or simply run `cp .env.example .env`)
 1.  Replace the `API_KEY=<PROVIDE_YOUR_KEY_HERE>` with actual key. For example `API_KEY=yoursecretapikey`
 
-### Get your api url
+### Add your GraphAPI URL
 
 1.  Go into your API Settings on https://my.graphapi.com
 2.  Click the "Copy to Clipboard" button
     ![Api Keys Section](./docs/img/get-api-url.png?raw=true)
-3.  Replace the `API_URL=<PROVIDE_YOUR_API_URL>` with your actual url. For example: API_URL=https://yourapiurl.com/graphql
+3.  Replace the `API_URL=<PROVIDE_YOUR_API_URL>` with your actual url. For example: `API_URL=https://yourapiurl.com/graphql`
 
 ### Run code generation
 
