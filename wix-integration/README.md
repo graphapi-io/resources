@@ -1,6 +1,6 @@
 # Wix integration with GraphApi
 
-To show public data from GraphApi inside the Wix page, try the following steps:
+To show public data from GraphApi inside the Wix page, perform the following steps:
 
 ## Step 1: Create a GraphApi
 
@@ -54,7 +54,7 @@ $w.onReady(async function () {
   const result = await client.query(
     `
       query LIST_PUBLIC_OBJECTS {
-        listPublics {
+        listPublicObjects {
           items {
             id
             name
@@ -64,7 +64,7 @@ $w.onReady(async function () {
       `
   );
 
-  const data = result.data.listPublics.items.map((item) =>
+  const data = result.data.listPublicObjects.items.map((item) =>
     ({ _id: item.id, name: item.name })
   );
 
