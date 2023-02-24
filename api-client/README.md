@@ -1,0 +1,1 @@
+# Simple typescript Api Client
