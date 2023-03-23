@@ -26,12 +26,33 @@ const subscribeCreateQuery = gql`
   }
 `;
 
+const subscribeDeleteQuery = gql`
+  subscription UPDATE_TEST($id: ID!) {
+    onDeleteTest(id: $id) {
+      id
+    }
+  }
+`;
+
+const subscribeUpdateQuery = gql`
+  subscription DELETE_TEST($id: ID!) {
+    onUpdateTest(id: $id) {
+      id
+      createdAt
+    }
+  }
+`;
+
+// Url like: https://xxx.appsync-api.region.amazonaws.com/graphql
 const url = process.env.API_URL as string;
+// Api Key like: ab-ccccccccccccccccccccccccccc
+const apiKey = process.env.API_KEY as string;
+
 const region = "eu-central-1";
 
 const auth = {
   type: "API_KEY" as "API_KEY",
-  apiKey: process.env.API_KEY as string,
+  apiKey: apiKey,
 };
 
 const httpLink = new HttpLink({ uri: url });
@@ -47,6 +68,23 @@ const client = new ApolloClient({
 });
 
 client.subscribe({ query: subscribeCreateQuery }).subscribe({
-  next: (data) => console.log("data", data),
+  next: (data) => console.log("created", data),
   error: (error) => console.log("error", error),
 });
+
+client
+  .subscribe({ query: subscribeUpdateQuery, variables: { id: "123" } })
+  .subscribe({
+    next: (data) => console.log("updated", data),
+    error: (error) => console.log("error", error),
+  });
+
+client
+  .subscribe({
+    query: subscribeDeleteQuery,
+    variables: { id: "123" },
+  })
+  .subscribe({
+    next: (data) => console.log("deleted", data),
+    error: (error) => console.log("error", error),
+  });
