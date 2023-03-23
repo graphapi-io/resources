@@ -1,19 +1,9 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  split,
-  gql,
-} from "@apollo/client/core";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { getMainDefinition } from "@apollo/client/utilities";
-import { SubscriptionClient } from "subscriptions-transport-ws";
-import fetch from "node-fetch";
+require("dotenv").config();
+import gql from "graphql-tag";
+import { v4 as uuid4 } from "uuid";
 import WebSocket from "ws";
 
-require("dotenv").config();
-
-const subscribeCreateQuery = gql`
+const subscribeCreateQuery = `
   subscription NEW_TEST {
     onCreateTest {
       id
@@ -22,87 +12,101 @@ const subscribeCreateQuery = gql`
   }
 `;
 
-const subscribeUpdateQuery = gql`
-  subscription UPDATE_TEST($id: ID!) {
-    onUpdateTest(id: $id) {
-      id
-      createdAt
-    }
-  }
-`;
+export interface ISubscriptionHandlerProps {
+  readonly host: string;
 
-const subscribeDeleteQuery = gql`
-  subscription DELETE_TEST($id: ID!) {
-    onDeleteTest(id: $id) {
-      id
-      createdAt
-    }
-  }
-`;
+  readonly realtimeEndpoint: string;
 
-const httpLink = new HttpLink({
-  uri: process.env.API_URL,
-  fetch: fetch,
-});
+  readonly apiKey: string;
 
-const prepareSubscriptionHeader = () => {
-  const header = {
-    "x-api-key": process.env.API_KEY,
-    host: process.env.WSS_HOST,
-  };
+  readonly query: string;
 
-  return btoa(JSON.stringify(header));
-};
+  readonly onMessageHandler?: (data: { [key: string]: string }) => void;
 
-const wsClient = new SubscriptionClient(
-  `${
-    process.env.API_SOCKET_URL
-  }?header=${prepareSubscriptionHeader()}&payload={}`,
-  {
-    reconnect: true,
-  },
-  WebSocket,
-  "graphql-ws"
-);
-
-wsClient.onError((error) => {
-  console.error("error", error);
-});
-
-const wsLink = new WebSocketLink(wsClient);
-
-const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query);
-
-    return (
-      definition.kind === "OperationDefinition" &&
-      definition.operation === "subscription"
-    );
-  },
-  wsLink,
-  httpLink
-);
-
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
-});
-
-try {
-  client
-    .subscribe({
-      query: subscribeCreateQuery,
-      fetchPolicy: "no-cache",
-      // variables: {
-      //   id: "2NPhrkdgajqlb7rR9HstvSeJEHk",
-      // },
-    })
-    .subscribe({
-      next: (data) => console.log("data", data),
-      error: (error) => console.error("error", error),
-      complete: () => console.log("complete"),
-    });
-} catch (error) {
-  console.error("error", error);
+  readonly onErrorHandler?: (error: Error) => void;
 }
+
+export class SubscriptionHandler {
+  private readonly props: ISubscriptionHandlerProps;
+
+  private header: string;
+
+  private payload: string = "{}";
+
+  private subscriptionId: string = "";
+
+  private subscription: string = "";
+
+  public readonly connection: WebSocket;
+
+  constructor(props: ISubscriptionHandlerProps) {
+    this.props = props;
+    this.header = btoa(JSON.stringify(this.getAuthorizationHeader()));
+    this.prepareSubscription();
+    this.connection = new WebSocket(
+      `${this.props.realtimeEndpoint}?header=${this.header}&payload=${btoa(
+        this.payload
+      )}`,
+      "graphql-ws"
+    );
+    this.connection.onopen = () => {
+      this.connection.send(JSON.stringify({ type: "connection_init" }));
+    };
+
+    this.connection.onerror = (event) => {
+      console.log(`WebSocket error: ${event}`);
+    };
+
+    this.connection.onmessage = (event) => {
+      const data = JSON.parse(event.data as string);
+      if (data.type === "connection_ack") {
+        this.connection.send(this.subscription);
+      } else if (data.type === "data" && this.props.onMessageHandler) {
+        this.props.onMessageHandler(data.payload);
+      } else if (data.type === "complete") {
+        this.connection.close();
+      } else if (data.type === "error") {
+        console.log("error", data.payload);
+      }
+    };
+  }
+
+  private getAuthorizationHeader() {
+    return {
+      "x-api-key": this.props.apiKey,
+      host: this.props.host,
+    };
+  }
+
+  private prepareSubscription() {
+    this.subscriptionId = uuid4();
+    this.subscription = JSON.stringify({
+      id: this.subscriptionId,
+      payload: {
+        data: this.props.query,
+        extensions: {
+          authorization: this.getAuthorizationHeader(),
+        },
+      },
+      type: "start",
+    });
+  }
+
+  public stopListening() {
+    this.connection.send(
+      JSON.stringify({ type: "stop", id: this.subscriptionId })
+    );
+  }
+}
+
+const subscriptionHandler = new SubscriptionHandler({
+  host: process.env.WSS_HOST as string,
+  apiKey: process.env.API_KEY as string,
+  query: JSON.stringify({
+    query: subscribeCreateQuery,
+  }),
+  realtimeEndpoint: process.env.WSS_URL as string,
+  onMessageHandler: (data) => {
+    console.log("update", data);
+  },
+});
