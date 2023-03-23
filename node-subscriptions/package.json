@@ -2,10 +2,10 @@
   "name": "node-subscriptions",
   "version": "1.0.0",
   "description": "An example of using GraphQL subscriptions in Node.js application\"",
-  "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,12 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "@apollo/client": "^3.7.10",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "node-fetch": "^2.6.9",
+    "subscriptions-transport-ws": "^0.11.0",
+    "ws": "^8.13.0"
   }
 }
