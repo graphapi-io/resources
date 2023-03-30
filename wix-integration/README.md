@@ -75,3 +75,18 @@ $w.onReady(async function () {
 ![Wix setup](./docs/img/wix-script-setup.png)
 
 That's it! Save and publish the page. If the data is matching your GraphApi schema, you should see a list in the browser.
+
+Sign up to graph**api**® @ [https://my.graphapi.com/signup](https://my.graphapi.com/signup)
+
+## Open Source at GraphApi.io
+
+Read our Code of Conduct at [https://graphapi-io.github.io/](https://graphapi-io.github.io/)
+
+## Links
+
+* graph**api**® [Terms of Service](https://graphapi.com/terms)
+* graph**api**® [Privacy Policy](https://graphapi.com/privacy)
+* graph**api**® [Data Processing Agreement](https://graphapi.com/dpa)
+
+
+
