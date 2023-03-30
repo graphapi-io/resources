@@ -64,3 +64,17 @@ The types based on the schema are always generated, and they consist of all of t
 As the only query we have is `blog`, the only query response in `src/generated/types.ts` is `IQueryBlogQuery`.
 
 It makes sense as the power of graphql is that you can use the same api in different applications, and each of them can query different pieces of data. With this approach each application can get its own types as well.
+
+Sign up to graph**api**® @ [https://my.graphapi.com/signup](https://my.graphapi.com/signup)
+
+## Open Source at GraphApi.io
+
+Read our Code of Conduct at [https://graphapi-io.github.io/](https://graphapi-io.github.io/)
+
+## Links
+
+* graph**api**® [Terms of Service](https://graphapi.com/terms)
+* graph**api**® [Privacy Policy](https://graphapi.com/privacy)
+* graph**api**® [Data Processing Agreement](https://graphapi.com/dpa)
+
+
