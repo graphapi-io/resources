@@ -1,0 +1,21 @@
+{
+  "name": "open-ai-cloud-function",
+  "version": "1.0.0",
+  "description": "An example of using CloudFunction with OpenAi in the Graphapi.com",
+  "main": "build/prompt-handler.js",
+  "scripts": {
+    "build": "node build-lambdas.js",
+    "test": "npm run build && node \"./__tests__/run-locally.js\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.114",
+    "esbuild": "^0.17.18",
+    "esbuild-envfile-plugin": "^1.0.5",
+    "openai": "^3.2.1"
+  }
+}
