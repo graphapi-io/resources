@@ -1,0 +1,19 @@
+{
+  "name": "third-party-labda",
+  "version": "1.0.0",
+  "description": "An example of calling a third-party-lambda from the after create lambda",
+  "main": "build/after-handler.js",
+  "scripts": {
+    "build": "node build-lambdas.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "@types/aws-lambda": "^8.10.114",
+    "esbuild": "^0.17.18"
+  }
+}
