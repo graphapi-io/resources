@@ -7,7 +7,7 @@
 3. Get an OpenAI API Key
 4. Create .env file with content "OPENAI_API_KEY=<YOUR-API-KEY>"
 5. Run `npm i`
-6. Run `npm test` to verify that the cloud function is working locally
+6. Run `npm test && npm run build` to verify that the cloud function is working locally and building it
 7. In GraphApi create an Object Type with following fields:
    ![PromptInput](./prompt-input.png)
 8. Upload the `prompt-handler.js` file to Graphapi.com in the `Functions` tab.
