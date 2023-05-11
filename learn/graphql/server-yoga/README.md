@@ -2,9 +2,9 @@
 
 While GraphQL APIs are easier to integrate for application developers, they can be challenging for the teams tasked with creating them. Initially, developers must decide whether to build a server from scratch or use one of the existing GraphQL services.
 
-The quickest way to run a GraphQL server locally is using Express, a popular Node.js framework. Foremost, make sure that you have a recent Node version installed on your machine. The easiest way to install Node.js and manage different versions is by using the Node version manager.
+One of the quickest way to run a GraphQL server locally is using the yoga packge. Foremost, make sure that you have a recent Node version installed on your machine. The easiest way to install Node.js and manage different versions is by using the Node version manager.
 
-With the express-graphql library, you can mount a GraphQL API server to the **/graphql** endpoint.
+With the graphql-yoga library, you can mount a GraphQL API server to the **/graphql** endpoint.
 
 ## Running the Express GraphQL server
 
