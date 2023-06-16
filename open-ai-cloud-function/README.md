@@ -1,6 +1,6 @@
 # Creating a cloud function that integrates with OpenAI
 
-## How to use
+## Complete the following steps
 
 1. Sign up to graph**api**® @ [https://my.graphapi.com/signup](https://my.graphapi.com/signup)
 2. Create an OpenAI API [https://platform.openai.com/overview](https://platform.openai.com/overview)
